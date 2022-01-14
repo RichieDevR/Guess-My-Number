@@ -1,18 +1,23 @@
-'use strict';
 'string';
 
+/* eslint-env browser */
+
 const secretNumber = (min, max) => {
-  min = Math.ceil(min);
+  const minimum = Math.ceil(min);
 
-  max = Math.floor(max);
+  const maximum = Math.floor(max);
 
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.floor(Math.random() * (maximum - minimum + 1) + minimum);
 };
 
 const check = document.querySelector('.check');
+
 const again = document.querySelector('.again');
+
 const secretNum = secretNumber(1, 20);
+
 console.log(secretNum);
+
 check.addEventListener('click', () => {
   const guess = Number(document.querySelector('.guess').value);
 
@@ -25,11 +30,13 @@ check.addEventListener('click', () => {
       "Damn you're good! That's my number!!!";
 
     document.querySelector('.number').textContent = secretNum;
+
     Number((document.querySelector('.score').value += 10));
   }
 });
 
 again.addEventListener('click', () => {
   document.querySelector('.message').textContent = 'Start guessing...';
+
   document.querySelector('.number').textContent = '?';
 });
