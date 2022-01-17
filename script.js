@@ -3,47 +3,50 @@
 /* eslint-env browser */
 
 const check = document.querySelector('.check');
+const again = document.querySelector('.again');
 let score = 20;
-document.querySelector('.score').textContent = score;
-// const again = document.querySelector('.again');
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
+let highScore = 0;
+const displayMessage = message => {
+  document.querySelector('.message').textContent = message;
+};
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 console.log(secretNumber);
 
 check.addEventListener('click', () => {
   const guess = Number(document.querySelector('.guess').value);
 
   if (!guess) {
-    document.querySelector('.message').textContent = 'No Number!';
+    displayMessage('You need to guess a number bro!');
   } else if (guess === secretNumber) {
-    document.querySelector('.message').textContent =
-      "Bro,you guessed my number! You're an absolute chad!";
+    displayMessage("Bro,you guessed my number! You're an absolute chad!");
+    document.querySelector('.number').textContent = secretNumber;
 
-    score += score;
-
-    document.querySelector('.score').textContent = score;
-  } else if (guess > secretNumber) {
-    if (score > 0) {
-      document.querySelector('.message').textContent = 'Too High Bro!';
-
-      score -= 1;
-
-      document.querySelector('.score').textContent = score;
-    } else {
-      document.querySelector('.message').textContent =
-        'Bro You suck, Game Over!!';
+    document.querySelector('body').style.backgroundColor = '#60b347';
+    document.querySelector('.number').style.width = '30rem';
+    if (score > highScore) {
+      highScore = score;
+      document.querySelector('.highscore').textContent = highScore;
     }
-  } else if (guess < secretNumber) {
+  } else if (guess !== secretNumber) {
     if (score > 0) {
-      document.querySelector('.message').textContent = 'Too low Broski!';
-
+      displayMessage(guess > secretNumber ? 'Too High Bro!' : 'Too Low Bro!');
       score -= 1;
-
       document.querySelector('.score').textContent = score;
     } else {
-      document.querySelector('.message').textContent =
-        'Bro You suck, Game Over!!';
+      displayMessage(`Bro you suck, Game Over! My number was ${secretNumber}`);
+      document.querySelector('.score').textContent = 0;
     }
   }
 });
 
-
+again.addEventListener('click', () => {
+  score = 20
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+console.log(secretNumber);
+  displayMessage('Start guessing bro...')
+  document.querySelector('.score').textContent = score;
+  document.querySelector('.number').textContent = '?';
+  document.querySelector('.guess').value = '';
+   document.querySelector('body').style.backgroundColor = '#222';
+  document.querySelector('.number').style.width = '15rem';
+})
