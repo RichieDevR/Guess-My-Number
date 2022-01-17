@@ -2,41 +2,48 @@
 
 /* eslint-env browser */
 
-const secretNumber = (min, max) => {
-  const minimum = Math.ceil(min);
-
-  const maximum = Math.floor(max);
-
-  return Math.floor(Math.random() * (maximum - minimum + 1) + minimum);
-};
-
 const check = document.querySelector('.check');
-
-const again = document.querySelector('.again');
-
-const secretNum = secretNumber(1, 20);
-
-console.log(secretNum);
+let score = 20;
+document.querySelector('.score').textContent = score;
+// const again = document.querySelector('.again');
+const secretNumber = Math.trunc(Math.random() * 20) + 1;
+console.log(secretNumber);
 
 check.addEventListener('click', () => {
   const guess = Number(document.querySelector('.guess').value);
 
   if (!guess) {
     document.querySelector('.message').textContent = 'No Number!';
-  }
-
-  if (guess === secretNum) {
+  } else if (guess === secretNumber) {
     document.querySelector('.message').textContent =
-      "Damn you're good! That's my number!!!";
+      "Bro,you guessed my number! You're an absolute chad!";
 
-    document.querySelector('.number').textContent = secretNum;
+    score += score;
 
-    Number((document.querySelector('.score').value += 10));
+    document.querySelector('.score').textContent = score;
+  } else if (guess > secretNumber) {
+    if (score > 0) {
+      document.querySelector('.message').textContent = 'Too High Bro!';
+
+      score -= 1;
+
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.message').textContent =
+        'Bro You suck, Game Over!!';
+    }
+  } else if (guess < secretNumber) {
+    if (score > 0) {
+      document.querySelector('.message').textContent = 'Too low Broski!';
+
+      score -= 1;
+
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.message').textContent =
+        'Bro You suck, Game Over!!';
+    }
   }
 });
 
-again.addEventListener('click', () => {
-  document.querySelector('.message').textContent = 'Start guessing...';
 
-  document.querySelector('.number').textContent = '?';
-});
