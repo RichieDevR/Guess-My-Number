@@ -4,15 +4,14 @@
 
 const check = document.querySelector('.check');
 const again = document.querySelector('.again');
-let score = 0;
+let score = 10;
 let highScore = 0;
 const displayMessage = message => {
   document.querySelector('.message').textContent = message;
 };
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
-// TODO: add a secret number update and timer to reset num maybe?
-// TODO:  also add sound effects
+// TODO:  add sound effects
 check.addEventListener('click', () => {
   const guess = Number(document.querySelector('.guess').value);
 
@@ -53,7 +52,7 @@ check.addEventListener('click', () => {
 });
 // Reset the game and score with new number
 again.addEventListener('click', () => {
-  score = 0;
+  score = score;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
   displayMessage('Start guessing bro...');
   document.querySelector('.score').textContent = score;
