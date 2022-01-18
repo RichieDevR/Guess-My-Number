@@ -41,7 +41,7 @@ check.addEventListener('click', () => {
 });
 
 again.addEventListener('click', () => {
-  score = highScore;
+  score = 0;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
   displayMessage('Start guessing bro...');
   document.querySelector('.score').textContent = score;
