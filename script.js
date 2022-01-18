@@ -36,7 +36,7 @@ check.addEventListener('click', () => {
     // When the wrong guess is made
   } else if (guess !== secretNumber) {
     // lowers the sore when answere is wrong
-    if (score > 0) {
+    if (score > 1) {
       displayMessage(
         guess > secretNumber ? 'Too High Bro!😦' : 'Too Low Bro!☹️'
       );
@@ -52,7 +52,9 @@ check.addEventListener('click', () => {
 });
 // Reset the game and score with new number
 again.addEventListener('click', () => {
-  score = score;
+  // eslint-disable-next-line no-self-assign
+  const currentScore = score;
+  score = currentScore;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
   displayMessage('Start guessing bro...');
   document.querySelector('.score').textContent = score;
